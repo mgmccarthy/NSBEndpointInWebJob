@@ -41,14 +41,14 @@ steps:
 - task: AzureAppServiceManage@0
   displayName: 'Stop NSBEndpointInWebJob'
   inputs:
-    azureSubscription: 'Pay-As-You-Go ($(AzureSubscriptionId))'
+    azureSubscription: '$(AzureSubscriptionId)'
     Action: 'Stop Azure App Service'
     WebAppName: NSBEndpointInWebJob
 
 - task: AzureRmWebAppDeployment@4
   displayName: 'Azure App Service Deploy: NSBEndpointInWebJob'
   inputs:
-    azureSubscription: 'Pay-As-You-Go ($(AzureSubscriptionId))'
+    azureSubscription: '$(AzureSubscriptionId)'
     WebAppName: NSBEndpointInWebJob
     packageForLinux: '$(Build.ArtifactStagingDirectory)\WebJob'
     enableCustomDeployment: true
@@ -57,6 +57,6 @@ steps:
 - task: AzureAppServiceManage@0
   displayName: 'Start NSBEndpointInWebJob'
   inputs:
-    azureSubscription: 'Pay-As-You-Go ($(AzureSubscriptionId))'
+    azureSubscription: '$(AzureSubscriptionId)'
     Action: 'Start Azure App Service'
     WebAppName: NSBEndpointInWebJob
