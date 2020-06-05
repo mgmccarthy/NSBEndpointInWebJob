@@ -1,1 +1,1 @@
-﻿dotnet NSBEndpointInWebJob.dll
+dotnet NSBEndpointInWebJob.dll
