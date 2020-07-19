@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NServiceBus;
@@ -17,7 +17,8 @@ namespace NSBEndpointInWebJob
                 Console.Title = "NSBEndpointWebJob";
                 var endpointConfiguration = new EndpointConfiguration("NSBEndpointWebJob");
 
-                var transportConnectionString = ctx.Configuration.GetConnectionString("TransportConnectionString");
+                var section = ctx.Configuration.GetSection("AppSettings");
+                var transportConnectionString = section.GetChildren().Single(x => x.Key == "TransportConnectionString").Value;
 
                 var transport = endpointConfiguration.UseTransport<AzureStorageQueueTransport>();
                 transport.ConnectionString(transportConnectionString);
